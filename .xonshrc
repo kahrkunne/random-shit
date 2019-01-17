@@ -1,0 +1,15 @@
+$AUTO_PUSHD = '1'
+$COMPLETIONS_CONFIRM = '1'
+$IGNOREEOF = '1'
+
+xontrib load coreutils docker_tabcomplete jedi mpl scrapy_tabcomplete vox vox_tabcomplete avox z schedule distributed
+
+$COMPLETIONS_DISPLAY = 'single'
+
+import sys
+sys.path.append('')
+
+$PROJECT_DIRS = ["~/Toshokan/toshokan", "~/Toshokan/toshokan2"]
+
+$PROMPT = '{short_cwd} {BLUE}{env_name:{} }{YELLOW}{gitstatus:{} }{GREEN}{prompt_end} '
+$DISPLAY=":0"
