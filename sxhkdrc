@@ -1,0 +1,147 @@
+# -------------
+# bspwm hotkeys
+# -------------
+
+# Exits node manager back to tty
+super + shift + e
+	bspc quit 1
+
+# Closes focused node
+super + shift + q
+	bspc node -c
+
+# Kill focused node
+super + shift + ctrl + q
+	bspc node -k
+
+# Balance the split ratios of the tree so that all nodes occupy the same area
+super + b
+	bspc desktop -B
+
+# Equalize/reset the split ratios of the tree of the selected desktop
+super + shift + b
+	bspc desktop -E
+
+# Focus between floating nodes and tiled nodes
+super + g
+	bspc node -f {next.floating,next.tiled}
+
+# Toggles focused node to be floating, fullscreen or tiled
+super + ctrl + {space,f,t}
+	bspc node -t {floating,fullscreen, tiled}
+
+# Swaps current node with the biggest node on the current desktop
+super + m
+	bspc node -s biggest
+
+# Focuses or swaps the current node in any direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# Preselects the splitting area of the selected node
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# Set splitting ratio of nodes
+super + ctrl + {1-9}
+	bspc node -r 0.{1-9}
+
+# Move node into preselected position
+super + shift {a,s,d,f}
+	bspc node -w {west,south,north,east}
+
+# Cancels the preselect of the focused node or all of them
+super + ctrl + {_,shift + }space
+	bspc {node -p cancel,desktop -c}
+
+# Resize nodes
+super + alt + {h,l}
+	S={-,+}; \
+	bspc node -e left $\{S\}20 || \
+	bspc node -e right   $\{S\}20
+super + alt + {j,k}
+	S={+,-}; \
+	bspc node -e down $\{S\}20 || \
+	bspc node -e up	$\{S\}20
+
+# Change desktops or move focused node to desktop from 0 to 9.
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} ^{1-9,10}
+
+# Circulate the leaves of the tree
+super + {comma,period}
+	bspc desktop -F {horizontal,vertical}
+
+# Rotate the tree in the given direction in relation to the focused node
+super + shift {comma,period}
+	bspc desktop -R {90,270}
+
+# Increase/decrease the node gap between all nodes
+super + {minus,equal}
+	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 5 ))
+
+# Change desktop padding
+super + {_, shift} + bracketright
+	bspc config -d focused right_padding $((`bspc config -d focused right_padding` {+,-} 20 ))
+
+super + {_, shift} + bracketleft
+	bspc config -d focused left_padding $((`bspc config -d focused left_padding` {+,-} 20 ))
+
+super + ctrl + {_, shift} + bracketright
+	bspc config -d focused bottom_padding $((`bspc config -d focused bottom_padding` {+,-} 20 ))
+
+super + ctrl + {_, shift} + bracketleft
+	bspc config -d focused top_padding $((`bspc config -d focused top_padding` {+,-} 20 ))
+# ----------------------
+# wm independent hotkeys
+# ----------------------
+
+# Reload sxhkd configuration file
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# Start terminal
+super + Return
+	termite -e xonsh
+
+# Start lighthouse
+super + r
+	rofi -show run -theme base16-darktooth
+
+# Start web browser
+super + alt + b
+	firefox
+
+super + p
+        mpc toggle
+
+super + s
+      teiler
+
+super + w
+      rofi -show window
+
+# Take a screenshot
+Print
+	uguu.sh -f
+
+super + e
+        python3 /home/kahr/Scripts/toggle_keymap.py
+
+ctrl + Print
+        uguu.sh
+
+super + c
+        move_dia_bolts.sh
+
+super + z
+        move_enchant.sh
+
+super + x
+        mkclick.sh
+
+super + v
+        xdotool mousemove 3150 850
+
+super + o
+        urxvt -e sh -c 'echo -e "\033]2;pseudoframe\007"; tput civis; sleep 365d'
